@@ -39,9 +39,43 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Create a new note",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "energydata"
+                ],
+                "summary": "Create a new note",
+                "parameters": [
+                    {
+                        "description": "Note",
+                        "name": "note",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
             }
         },
-        "/api/v1/notes:id": {
+        "/api/v1/notes/:id": {
             "get": {
                 "description": "Fetch data by id",
                 "consumes": [

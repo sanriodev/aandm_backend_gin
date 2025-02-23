@@ -4,12 +4,12 @@ paths:
   /api/v1/notes:
     get:
       consumes:
-        - application/json
+      - application/json
       description: Fetch all data
       produces:
-        - application/json
+      - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             additionalProperties:
@@ -17,22 +17,45 @@ paths:
             type: object
       summary: Get all data
       tags:
-        - energydata
-  /api/v1/notes:id:
+      - energydata
+    post:
+      consumes:
+      - application/json
+      description: Create a new note
+      parameters:
+      - description: Note
+        in: body
+        name: note
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create a new note
+      tags:
+      - energydata
+  /api/v1/notes/:id:
     get:
       consumes:
-        - application/json
+      - application/json
       description: Fetch data by id
       parameters:
-        - description: entryId
-          in: path
-          name: id
-          required: true
-          type: integer
+      - description: entryId
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
-        - application/json
+      - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             additionalProperties:
@@ -40,5 +63,5 @@ paths:
             type: object
       summary: Get data by id
       tags:
-        - energydata
-swagger: '2.0'
+      - energydata
+swagger: "2.0"
