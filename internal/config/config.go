@@ -20,9 +20,8 @@ func LoadConfig() types.AppConfig {
 	MongoPort := os.Getenv("MONGO_PORT")
 	MongoUser := os.Getenv("MONGO_USERNAME")
 	MongoPassword := os.Getenv("MONGO_PASSWORD")
-	ModbusHost := os.Getenv("MODBUS_HOST")
-	ModbusPort := os.Getenv("MODBUS_PORT")
+	MongoDatabase := os.Getenv("MONGO_DATABASE")
 
-	*Config = types.AppConfig{AppPort: AppPort, MongoHost: MongoHost, MongoPort: MongoPort, MongoUser: MongoUser, MongoPassword: MongoPassword, ModbusHost: ModbusHost, ModbusPort: ModbusPort}
+	*Config = types.AppConfig{AppPort: AppPort, MongoHost: MongoHost, MongoPort: MongoPort, MongoUser: MongoUser, MongoPassword: MongoPassword, MongoDatabase: MongoDatabase}
 	return *Config
 }

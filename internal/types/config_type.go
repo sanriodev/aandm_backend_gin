@@ -6,6 +6,5 @@ type AppConfig struct {
 	MongoPort     string
 	MongoUser     string
 	MongoPassword string
-	ModbusHost    string
-	ModbusPort    string
+	MongoDatabase string
 }

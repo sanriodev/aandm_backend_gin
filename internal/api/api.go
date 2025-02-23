@@ -26,11 +26,12 @@ func BootstrapApi() {
 	// Swagger documentation handler
 	api.GET("/doc/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	// Grouping energy data routes under "/energy-data"
-	energyDataController := api.Group("/energy-data")
+	// Grouping energy data routes under "/notes"
+	notesController := api.Group("/notes")
 	{
-		energyDataController.GET("/", mongo.GetData)
-		energyDataController.GET("/:id", mongo.GetDataById)
+		notesController.GET("/", mongo.GetNotes)
+		notesController.GET("/:id", mongo.GetNoteById)
+		notesController.POST("/", mongo.CreateNote)
 	}
 
 	server.Run(":" + config.Config.AppPort)

@@ -1,6 +1,6 @@
-# Watt's good?
+# Server for aandm App
 
-The classic `Watt's up?-Api` rewritten in go for simplicity and blazingly fast performance!
+The classic `aandm-API` rewritten in go for simplicity and blazingly fast performance!
 
 ### Api basepath
 

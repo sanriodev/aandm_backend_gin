@@ -30,15 +30,19 @@ func BootstrapDatabase() {
 	}
 }
 
+func getCollection(scope string) *mongo.Collection {
+	return client.Database(config.Config.MongoDatabase).Collection(scope)
+}
+
 // @Summary Get all data
 // @Description Fetch all data
 // @Tags energydata
 // @Accept json
 // @Produce json
 // @Success 200 {object} map[string]string
-// @Router /api/v1/energy-data [get]
-func GetData(c *gin.Context) {
-	collection := client.Database("your-database-name").Collection("your-collection-name")
+// @Router /api/v1/notes [get]
+func GetNotes(c *gin.Context) {
+	collection := getCollection("notes")
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
@@ -65,10 +69,10 @@ func GetData(c *gin.Context) {
 // @Produce json
 // @Param id path int true "entryId"
 // @Success 200 {object} map[string]string
-// @Router /api/v1/energy-data:id [get]
-func GetDataById(c *gin.Context) {
+// @Router /api/v1/notes/:id [get]
+func GetNoteById(c *gin.Context) {
 	id := c.Param("id")
-	collection := client.Database("your-database-name").Collection("your-collection-name")
+	collection := getCollection("notes")
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
@@ -84,4 +88,32 @@ func GetDataById(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
+}
+
+// @Summary Create a new note
+// @Description Create a new note
+// @Tags energydata
+// @Accept json
+// @Produce json
+// @Param note body map[string]interface{} true "Note"
+// @Success 201 {object} map[string]interface{}
+// @Router /api/v1/notes [post]
+func CreateNote(c *gin.Context) {
+	var note map[string]interface{}
+	if err := c.BindJSON(&note); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	collection := getCollection("notes")
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+
+	result, err := collection.InsertOne(ctx, note)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, result)
 }

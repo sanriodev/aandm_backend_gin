@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/energy-data": {
+        "/api/v1/notes": {
             "get": {
                 "description": "Fetch all data",
                 "consumes": [
@@ -41,7 +41,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/energy-data:id": {
+        "/api/v1/notes:id": {
             "get": {
                 "description": "Fetch data by id",
                 "consumes": [
