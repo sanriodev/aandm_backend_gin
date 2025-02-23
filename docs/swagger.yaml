@@ -1,0 +1,44 @@
+info:
+  contact: {}
+paths:
+  /api/v1/energy-data:
+    get:
+      consumes:
+      - application/json
+      description: Fetch all data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all data
+      tags:
+      - energydata
+  /api/v1/energy-data:id:
+    get:
+      consumes:
+      - application/json
+      description: Fetch data by id
+      parameters:
+      - description: entryId
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get data by id
+      tags:
+      - energydata
+swagger: "2.0"
